@@ -28,7 +28,8 @@ export async function onRequestGet({ request, env }) {
   url.searchParams.set("client_id", env.GITHUB_CLIENT_ID);
   url.searchParams.set("redirect_uri", CALLBACK_URL);
   url.searchParams.set("state", state);
-  url.searchParams.set("scope", "repo");
+  url.searchParams.set("scope", "public_repo");
+
 
   return new Response(null, {
     status: 302,
