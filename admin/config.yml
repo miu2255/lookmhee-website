@@ -1,8 +1,11 @@
 
+
 backend:
   name: github
   repo: miu2255/lookmhee-website
   branch: main
+  base_url: https://lookmhee-blog.pages.dev
+  auth_endpoint: api/auth
 
 locale: th
 
