@@ -1,0 +1,27 @@
+
+backend:
+  name: github
+  repo: miu2255/lookmhee-website
+  branch: main
+
+locale: th
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "บทความ"
+    label_singular: "บทความ"
+    folder: "content/posts"
+    create: true
+    extension: "json"
+    format: "json"
+    slug: "{{slug}}"
+    fields:
+      - { label: "ชื่อบทความ", name: "title", widget: "string" }
+      - { label: "หมวดหมู่", name: "category", widget: "string" }
+      - { label: "อีโมจิ", name: "emoji", widget: "string", default: "📚" }
+      - { label: "คำอธิบายสั้น", name: "excerpt", widget: "text" }
+      - { label: "วันที่เผยแพร่", name: "date", widget: "datetime", format: "YYYY-MM-DD", time_format: false }
+      - { label: "เนื้อหาบทความ", name: "body", widget: "list", field: { label: "ย่อหน้า", name: "paragraph", widget: "text" } }
