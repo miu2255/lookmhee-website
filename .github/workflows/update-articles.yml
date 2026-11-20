@@ -1,0 +1,44 @@
+
+name: Update Lookmhee Articles
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/posts/**"
+      - "scripts/build_articles.py"
+      - ".github/workflows/update-articles.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lookmhee-articles
+  cancel-in-progress: false
+
+jobs:
+  build-articles:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Generate articles.json
+        run: python3 scripts/build_articles.py
+
+      - name: Commit updated articles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add articles.json
+          if git diff --cached --quiet; then
+            echo "No article changes"
+          else
+            git commit -m "Auto-update Lookmhee articles"
+            git push
+          fi
